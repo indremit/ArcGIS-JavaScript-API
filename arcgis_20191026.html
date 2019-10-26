@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Aplankyti užsienio miestai</title>
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.13/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.13/"></script>
+
+  <script>
+    require([
+      "esri/Map",
+      "esri/views/SceneView",
+      "esri/Basemap",
+
+      "esri/layers/GraphicsLayer",
+
+      "esri/Graphic",
+      "esri/geometry/Point",
+
+      "esri/symbols/SimpleMarkerSymbol",
+
+      "esri/widgets/Search",
+      "esri/widgets/Home"
+    ], function (Map, SceneView, Basemap, GraphicsLayer, Graphic, Point, SimpleMarkerSymbol, Search, Home) {
+
+      var map = new Map({
+        basemap: "streets-navigation-vector"
+      });
+
+      var view = new SceneView({
+        container: "viewDiv",
+        map: map,
+        center: [20, 54.02700],
+        zoom: 3
+      });
+
+
+      //Paieška
+      view.ui.add(new Search({
+        view: view
+      }), "top-right");
+
+      //Grįžti į pradinę padėtį
+      var homeBtn = new Home({
+        view: view
+      });
+      homeBtn.startup();
+
+      view.ui.add(homeBtn, "top-left");
+
+
+      var graphicsLayer = new GraphicsLayer();
+      map.add(graphicsLayer);
+
+
+      //1: PRAHA
+      var point = new Point({
+        x: 14.42076,
+        y: 50.08804,
+        z: 0
+      }),
+
+        markerSymbol = new SimpleMarkerSymbol({
+          color: [226, 119, 40],
+          outline: {
+            color: [255, 255, 255],
+            width: 2
+          }
+        });
+
+      var popupTemplate1 = {
+        title: "PRAHA",
+        content: "<p>Pavasario kelionė 2016 m. Aplankytos vietos:</p>" +
+          "<ul><li>Karolio tiltas</li>" +
+          "<li>Prahos astronominis laikrodis</li>" +
+          "<li>Senamiestis</li>" +
+          "<li>Šv. Vito katedra</li><ul>"
+      };
+
+      var pointGraphic = new Graphic({
+        geometry: point,
+        symbol: markerSymbol,
+        popupTemplate: popupTemplate1
+      });
+
+      graphicsLayer.add(pointGraphic);
+
+      //	
+
+      //2: VROCLAVAS
+      var point2 = new Point({
+        x: 17.03854,
+        y: 51.10789,
+        z: 0
+      });
+
+      var popupTemplate2 = {
+        title: "VROCLAVAS",
+        content: "<p>Pavasario kelionė 2016 m. Aplankytos vietos:</p>" +
+          "<ul><li>Senamiestis</li>" +
+          "<li>Turgaus aikštė</li>" +
+          "<li>Vroclavo nykštukai</li><ul>"
+      };
+
+      var pointGraphic2 = new Graphic({
+        geometry: point2,
+        symbol: markerSymbol,
+        popupTemplate: popupTemplate2
+      });
+
+      graphicsLayer.add(pointGraphic2);
+
+
+      //3: DAUGPILIS
+      var point3 = new Point({
+        x: 26.536179,
+        y: 55.874736,
+        z: 0
+      });
+
+      var popupTemplate3 = {
+        title: "DAUGPILIS",
+        content: "<p>Dienos išvyka 2016 m. Aplankytos vietos:</p>" +
+          "<ul><li>Dubrovino parkas</li>" +
+          "<li>Daugpilio universiteto skveras</li><ul>"
+      };
+
+      var pointGraphic3 = new Graphic({
+        geometry: point3,
+        symbol: markerSymbol,
+        popupTemplate: popupTemplate3
+      });
+
+      graphicsLayer.add(pointGraphic3);
+
+
+      //4: RYGA
+      var point4 = new Point({
+        x: 24.107939,
+        y: 56.949682,
+        z: 0
+      });
+
+      var popupTemplate4 = {
+        title: "RYGA",
+        content: "<p>Mokyklos ekskursija 2011 m. Aplankytos vietos:</p>" +
+          "<ul><li>Senamiestis</li>" +
+          "<li>Šv. Petro bažnyčia</li></ul></br>" +
+
+          "<p>Vasaros kelionė 2018 m. Aplankytos vietos:</p>" +
+          "<ul><li>Centrinis Rygos turgus</li>" +
+          "<li>Kačių namas</li>" +
+          "<li>Latvijos mokslų akademijos apžvalgos aikštelė</li></ul>"
+      };
+
+      var pointGraphic4 = new Graphic({
+        geometry: point4,
+        symbol: markerSymbol,
+        popupTemplate: popupTemplate4
+      });
+
+      graphicsLayer.add(pointGraphic4);
+
+
+      //5: JŪRMALA
+      var point5 = new Point({
+        x: 23.616849,
+        y: 56.947079,
+        z: 0
+      });
+
+      var popupTemplate5 = {
+        title: "JŪRMALA",
+        content: "<p>Vasaros kelionė 2018 m. Aplankytos vietos:</p>" +
+          "<ul><li>Jūrmalos paplūdimiai</li>" +
+          "<li>Jūrmalos muziejus</li>" +
+          "<li>Gintaro parkas</li></ul>"
+      };
+
+      var pointGraphic5 = new Graphic({
+        geometry: point5,
+        symbol: markerSymbol,
+        popupTemplate: popupTemplate5
+      });
+
+      graphicsLayer.add(pointGraphic5);
+
+
+      //6: VARŠUVA
+      var point6 = new Point({
+        x: 21.012229,
+        y: 52.229676,
+        z: 0
+      });
+
+      var popupTemplate6 = {
+        title: "VARŠUVA",
+        content: "<p>Pavasario kelionė 2016 m. Aplankytos vietos:</p>" +
+          "<ul><li>Senamiestis</li></ul>"
+      };
+
+      var pointGraphic6 = new Graphic({
+        geometry: point6,
+        symbol: markerSymbol,
+        popupTemplate: popupTemplate6
+      });
+
+      graphicsLayer.add(pointGraphic6);
+
+    });
+  </script>
+</head>
+
+<body>
+  <div id="viewDiv"></div>
+</body>
+
+</html>
