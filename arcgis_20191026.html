@@ -33,8 +33,10 @@
       "esri/symbols/SimpleMarkerSymbol",
 
       "esri/widgets/Search",
-      "esri/widgets/Home"
-    ], function (Map, SceneView, Basemap, GraphicsLayer, Graphic, Point, SimpleMarkerSymbol, Search, Home) {
+      "esri/widgets/Home",
+      "esri/layers/MapImageLayer"
+
+    ], function (Map, SceneView, Basemap, GraphicsLayer, Graphic, Point, SimpleMarkerSymbol, Search, Home, MapImageLayer) {
 
       var map = new Map({
         basemap: "streets-navigation-vector"
@@ -44,9 +46,13 @@
         container: "viewDiv",
         map: map,
         center: [20, 54.02700],
-        zoom: 3
+        zoom: 3,
+        environment: {
+            atmosphere: {
+              quality: "high"
+            },
+        },
       });
-
 
       //Paieška
       view.ui.add(new Search({
@@ -74,20 +80,20 @@
       }),
 
         markerSymbol = new SimpleMarkerSymbol({
-          color: [226, 119, 40],
+          color: [0, 204, 0],
           outline: {
             color: [255, 255, 255],
-            width: 2
+            width: 1
           }
         });
+
 
       var popupTemplate1 = {
         title: "PRAHA",
         content: "<p>Pavasario kelionė 2016 m. Aplankytos vietos:</p>" +
-          "<ul><li>Karolio tiltas</li>" +
-          "<li>Prahos astronominis laikrodis</li>" +
-          "<li>Senamiestis</li>" +
-          "<li>Šv. Vito katedra</li><ul>"
+          "<ul><li><a href='https://www.greitai.lt/kelioniumanija/salys/cekija/lankytinos-vietos/karolio-tiltas/' target='_blank'>Karolio tiltas</a></li>" +
+          "<li><a href='https://www.greitai.lt/kelioniumanija/salys/cekija/lankytinos-vietos/prahos-astronominis-laikrodis/' target='_blank'>Prahos astronominis laikrodis</a></li>" +
+          "<li><a href='https://kartaprahoje.wordpress.com/2015/06/01/sv-vito-katedra/' target='_blank'>Šv. Vito katedra</a></li><ul>"
       };
 
       var pointGraphic = new Graphic({
@@ -97,8 +103,7 @@
       });
 
       graphicsLayer.add(pointGraphic);
-
-      //	
+      
 
       //2: VROCLAVAS
       var point2 = new Point({
@@ -110,9 +115,8 @@
       var popupTemplate2 = {
         title: "VROCLAVAS",
         content: "<p>Pavasario kelionė 2016 m. Aplankytos vietos:</p>" +
-          "<ul><li>Senamiestis</li>" +
-          "<li>Turgaus aikštė</li>" +
-          "<li>Vroclavo nykštukai</li><ul>"
+          "<li><a href='http://www.urkistravel.lt/kelioniu-idejos/vroclavo-turgaus-aikste-miesto-sirdis/' target='_blank'>Turgaus aikštė</a></li>" +
+          "<li><a href='https://www.lrt.lt/naujienos/gyvenimas/13/843390/vroclavas-lenkijos-miestas-kuriame-butina-ziureti-po-kojomis' target='_blank'>Vroclavo nykštukai</a></li><ul>"
       };
 
       var pointGraphic2 = new Graphic({
@@ -134,8 +138,7 @@
       var popupTemplate3 = {
         title: "DAUGPILIS",
         content: "<p>Dienos išvyka 2016 m. Aplankytos vietos:</p>" +
-          "<ul><li>Dubrovino parkas</li>" +
-          "<li>Daugpilio universiteto skveras</li><ul>"
+          "<ul><li><a href='https://www.mytrips.lt/Idomybes/Daugpilis-pazintis-su-miestu/416/' target='_blank'>Dubrovino parkas</a></li><ul>"
       };
 
       var pointGraphic3 = new Graphic({
@@ -157,13 +160,13 @@
       var popupTemplate4 = {
         title: "RYGA",
         content: "<p>Mokyklos ekskursija 2011 m. Aplankytos vietos:</p>" +
-          "<ul><li>Senamiestis</li>" +
-          "<li>Šv. Petro bažnyčia</li></ul></br>" +
+          "<ul><li><a href='http://augustinas.net/tag/rygos-senamiestis' target='_blank'>Senamiestis</a></li>" +
+          "<li><a href='https://www.latvia.travel/lt/lankytina-vieta/sv-petro-baznycia' target='_blank'>Šv. Petro bažnyčia</a></li></ul></br>" +
 
           "<p>Vasaros kelionė 2018 m. Aplankytos vietos:</p>" +
-          "<ul><li>Centrinis Rygos turgus</li>" +
-          "<li>Kačių namas</li>" +
-          "<li>Latvijos mokslų akademijos apžvalgos aikštelė</li></ul>"
+          "<ul><li> <a href='https://turizmogidas.lt/lt/lankytinos-vietos/rygos-savivaldybe/centrinis-rygos-turgus-923' target='_blank'>Centrinis Rygos turgus</a></li>" +
+          "<li> <a href='https://keliaukimpatys.lt/ryga-latvija/' target='_blank'>Kačių namas</a></li>" +
+          "<li> <a href='https://www.delfi.lt/keliones/per-europa/kitoks-zvilgsnis-i-ryga-vietos-is-kuriu-atsiveria-graziausia-miesto-panorama.d?id=78756161' target='_blank'>Latvijos mokslų akademijos apžvalgos aikštelė</a></li></ul>"
       };
 
       var pointGraphic4 = new Graphic({
@@ -185,9 +188,9 @@
       var popupTemplate5 = {
         title: "JŪRMALA",
         content: "<p>Vasaros kelionė 2018 m. Aplankytos vietos:</p>" +
-          "<ul><li>Jūrmalos paplūdimiai</li>" +
-          "<li>Jūrmalos muziejus</li>" +
-          "<li>Gintaro parkas</li></ul>"
+          "<ul><li><a href='https://www.latvia.travel/lt/straipsnis/rygos-ir-jurmalos-papludimiai' target='_blank'>Jūrmalos paplūdimiai</a></li>" +
+          "<li><a href='https://www.latvia.travel/lt/lankytina-vieta/jurmalos-miesto-muziejus' target='_blank'>Jūrmalos muziejus</a></li>" +
+          "<li><a href='https://www.latvia.travel/lt/lankytina-vieta/dzintaru-misko-parkas' target='_blank'>Gintaro parkas</a></li></ul>"
       };
 
       var pointGraphic5 = new Graphic({
@@ -209,7 +212,7 @@
       var popupTemplate6 = {
         title: "VARŠUVA",
         content: "<p>Pavasario kelionė 2016 m. Aplankytos vietos:</p>" +
-          "<ul><li>Senamiestis</li></ul>"
+          "<ul><li><a href='http://augustinas.net/tag/varsuvos-senamiestis' target='_blank'>Senamiestis</a></li></ul>"
       };
 
       var pointGraphic6 = new Graphic({
